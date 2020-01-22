@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Vue组件中data选项为什么必须是个函数而Vue的根实例则没有此限制？</h1>
+        <!-- 根实例data -->
+        <div>{{foo}}</div>
+        <!-- 组件实例data -->
+        <my-comp></my-comp>
+        <my-comp></my-comp>
+    </div>
+</body>
+<script>
+    // 测试组件
+    Vue.component('my-comp', {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        template: 
+        `
+            <button @click="add">you clicked me {{count}} times.</button>
+        `,
+        methods: {
+            add() {
+                this.count++;
+            }
+        },
+    })
+    const app = new Vue({
+        el: '#app',
+        data: {
+            foo: 'foo'
+        }
+    })
+    console.log(app,app.$data)
+</script>
+</html>
